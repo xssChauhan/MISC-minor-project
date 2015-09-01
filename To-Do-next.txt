@@ -1,0 +1,6 @@
+The Parser checks for the validity of the YAML document and returns the YAML construct
+
+To-Do:
+1. Decouple ExecuteLessonFromYAML.m and ParserYAML.m 
+2. Add the ability to check for the validity of YAML docs while installing.
+3. Modify the ExecuteLessonFromYAML.m and ParserYAML.m to account for graphs 
