@@ -4,7 +4,7 @@
 
 
 classdef ParserYAML
-    properties 
+    properties (SetAccess = 'private')
         %Add properties here if and when needed
         AllowedHeads = cellstr(['id     ';'content';'type   '])
         AllowedTypes = [1,2,3,4,5,6]
@@ -13,20 +13,19 @@ classdef ParserYAML
         Correct = 1;
     end
     methods
-        function YAMLObj =  ParserYAML(obj, filename)
-            yaml_file = filename;
+        function obj =  ParserYAML(~)
+            yaml_file = 'text.yml';
             addpath(genpath('YAMLParser'));
-            obj.YAMLStruct = ReadYAML(yaml_file);
+            obj.YAMLStruct = ReadYaml(yaml_file);
             pause on;
             obj.YAMLStructNames = char(fieldnames(obj.YAMLStruct));
-            obj.checkParse()
         end
         function checkParse(obj)
             for i = 1:length(obj.YAMLStructNames)
                 %Checking for the correct heads
                  heads = fieldnames(obj.YAMLStruct.(obj.YAMLStructNames(i,:)));
                  for j = 1:3
-                     if ~strcmp(heads.i,obj.AllowedHeads.i)
+                     if ~strcmp(heads(j),obj.AllowedHeads(j))
                         obj.Correct = 0;
                      end 
                  end 
@@ -44,15 +43,13 @@ classdef ParserYAML
             if obj.Correct 
                 yamlStruct = obj.YAMLStruct;
                 structNames = obj.YAMLStructNames;
-            else
-                %Dump the YAMLstruct and return an error
             end
         end
         
         %Return the validity of YAML to a call that just checks the
         %validity of YAML doc.
         function valid = isValidYAML(obj)
-            valid = obj.Correct
+            valid = obj.Correct;
         end
         
     end %end methods

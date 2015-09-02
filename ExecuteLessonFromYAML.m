@@ -16,12 +16,8 @@
 
 %Add more comments to better explain the functions and classes
 classdef ExecuteLessonFromYAML
-     properties (SetAccess = 'private')
-        ObjectType = [1 2 3 4];  
-     end
     methods 
-        function obj = ExecuteLessonFromYAML(obj,YamlStruct, YamlStructNames)
-            
+        function obj = ExecuteLessonFromYAML(YamlStruct, YamlStructNames)
             for i = 1:length(YamlStructNames)
                 Task = LessonContent(YamlStruct.(YamlStructNames(i,:)).id,YamlStruct.(YamlStructNames(i,:)).content,YamlStruct.(YamlStructNames(i,:)).type);
                 obj.CheckObjectType(Task);
@@ -51,7 +47,7 @@ classdef ExecuteLessonFromYAML
             disp(LessonContentobj.content);
        end
       function  CheckObjectType(obj,LessonContentobj)
-          if any(LessonContentobj.type == obj.ObjectType)   
+             
             switch LessonContentobj.type
                     case 1
                         obj.ObjectType1(LessonContentobj);
@@ -63,7 +59,7 @@ classdef ExecuteLessonFromYAML
                         obj.ObjectType4(LessonContentobj);
             end
              %Add error handling for different object type
-          end
+          
       end
     end
 end

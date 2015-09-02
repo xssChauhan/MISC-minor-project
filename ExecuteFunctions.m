@@ -15,18 +15,12 @@
 
 
 %Add more comments to better explain the functions and classes
-classdef ExecuteFunctions
+classdef ExecuteLessonFromYAML
      properties (SetAccess = 'private')
         ObjectType = [1 2 3 4];  
      end
     methods 
-        function YamlParseAndPlay(obj)
-            yaml_file = 'text.yml';
-            addpath(genpath('YAMLparser'));
-            YamlStruct = ReadYaml(yaml_file);
-            pause on;
-            YamlStructNames = char(fieldnames(YamlStruct));
-            %Added Modularity to this part
+        function obj = ExecuteLessonFromYAML(obj,YamlStruct, YamlStructNames)
             
             for i = 1:length(YamlStructNames)
                 Task = LessonContent(YamlStruct.(YamlStructNames(i,:)).id,YamlStruct.(YamlStructNames(i,:)).content,YamlStruct.(YamlStructNames(i,:)).type);
